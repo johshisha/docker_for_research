@@ -1,0 +1,27 @@
+FROM ubuntu:16.04
+
+MAINTAINER Satoshi Sanjo <johshisha@gmail.com>
+
+ARG PASSWD='docker'
+
+RUN apt-get update
+RUN apt-get install -y \
+        sudo \
+        vim \
+        git \
+        python3.5 \
+        python3-pip
+
+RUN pip3 install --upgrade pip
+RUN pip3 install pandas jupyter matplotlib keras tensorflow chainer sklearn
+
+RUN useradd docker -m -s "/bin/bash" && echo "docker:$PASSWD" | chpasswd && adduser docker sudo
+USER docker
+
+RUN echo 'alias python="python3"' >> $HOME/.bashrc && \
+    echo 'alias pip="pip3"' >> $HOME/.bashrc && \
+    echo 'alias jupyter-notebook="jupyter-notebook --ip=0.0.0.0"' >> $HOME/.bashrc && \
+    . $HOME/.bashrc
+
+WORKDIR /home/docker/work
+
