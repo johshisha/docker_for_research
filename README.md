@@ -1,15 +1,20 @@
 ## Dockerfiles for research
+
+### Install dockers
 - [install docker on ubuntu](./install_dockers.md)
 
 ### Sample
-sample Dockerfile is available [here](./sample)
+Sample for creating new environment on gpu.  
+(If you want to create environment on cpu, replace `for_research_on_gpu` to `for_research_on_cpu` in Dockerfile.)
 ```
-$ docker build -t sample/sample ./sample
-$ docker run --rm -it -p 8888:8888 -v "$PWD":/home/docker/work sample/sample /bin/bash
+$ wget https://raw.githubusercontent.com/johshisha/docker_for_research/master/sample/Dockerfile
+$ touch requirements.txt # and edit if you want
+$ docker build -t sample/sample .
+$ nvidia-docker run --rm -it -p 8888:8888 -v "$PWD":/home/docker/work sample/sample /bin/bash # If on cpu, replace nvidia-docker to docker
 ```
 
 
-### Run on GPU
+## Build and Run on GPU
 - build
 ```
 $ git clone https://github.com/johshisha/docker_for_research && cd docker_for_research
@@ -26,7 +31,7 @@ $ nvidia-docker run --rm -it -p 8888:8888 -v "$PWD":/home/docker/work [tag]:[ver
 $ nvidia-docker run --rm -it -p 8888:8888 -v "$PWD":/home/docker/work [tag]:[version] /bin/bash
 ```
 
-### Run on CPU
+## Build and Run on CPU
 - build
 ```
 $ git clone https://github.com/johshisha/docker_for_research && cd docker_for_research
@@ -42,5 +47,3 @@ $ docker run --rm -it -p 8888:8888 -v "$PWD":/home/docker/work [tag]:[version] j
 ```
 $ docker run --rm -it -p 8888:8888 -v "$PWD":/home/docker/work [tag]:[version] /bin/bash
 ```
-
-
