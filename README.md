@@ -18,7 +18,7 @@ $ nvidia-docker run --rm -it -p 8888:8888 -v "$PWD":/home/docker/work sample/sam
 - build
 ```
 $ git clone https://github.com/johshisha/docker_for_research && cd docker_for_research
-$ docker build -t [tag]:[version] -f Dockerfile.gpu ./dockers/build/ --build-arg PASSWD=docker_user_password
+$ docker build -t [tag]:[version] -f ./dockers/build/Dockerfile.gpu . --build-arg PASSWD=docker_user_password
 ```
 - run jupyter notebook
 ```
@@ -35,7 +35,7 @@ $ nvidia-docker run --rm -it -p 8888:8888 -v "$PWD":/home/docker/work [tag]:[ver
 - build
 ```
 $ git clone https://github.com/johshisha/docker_for_research && cd docker_for_research
-$ docker build -t [tag]:[version] -f Dockerfile.cpu ./dockers/build/ --build-arg PASSWD=docker_user_password
+$ docker build -t [tag]:[version] -f ./dockers/build/Dockerfile.cpu . --build-arg PASSWD=docker_user_password
 ```
 - run jupyter notebook
 ```

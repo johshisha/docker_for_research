@@ -1,4 +1,4 @@
-FROM johshisha/for_research_on_gpu:1.0
+FROM johshisha/for_research_on_gpu:latest
 
 USER root
 ADD ./requirements.txt requirements.txt

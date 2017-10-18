@@ -1,8 +1,10 @@
-FROM nvidia/cuda:8.0-cudnn6-runtime
+FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
 
 MAINTAINER Satoshi Sanjo <johshisha@gmail.com>
 
 ARG PASSWD='docker'
+
+ENV CUDA_PATH /usr/local/cuda
 
 RUN apt-get update
 RUN apt-get install -y \
@@ -10,10 +12,14 @@ RUN apt-get install -y \
         vim \
         git \
         python3.5 \
-        python3-pip
+        python3-pip \
+        python3-dev \
+        python3-setuptools \
+        build-essential \
+        python-numpy
 
 RUN pip3 install --upgrade pip
-RUN pip3 install pandas jupyter matplotlib keras tensorflow-gpu chainer sklearn
+RUN pip3 install cupy pandas jupyter matplotlib keras tensorflow-gpu chainer sklearn
 
 RUN useradd docker -m -s "/bin/bash" && echo "docker:$PASSWD" | chpasswd && adduser docker sudo
 USER docker
@@ -22,6 +28,8 @@ RUN echo 'alias python="python3"' >> $HOME/.bashrc && \
     echo 'alias pip="pip3"' >> $HOME/.bashrc && \
     echo 'alias jupyter-notebook="jupyter-notebook --ip=0.0.0.0"' >> $HOME/.bashrc && \
     . $HOME/.bashrc
+
+RUN mkdir -p $HOME/.config/matplotlib && echo 'backend: Agg' >> $HOME/.config/matplotlib/matplotlibrc
 
 WORKDIR /home/docker/work
 
