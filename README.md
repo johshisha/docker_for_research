@@ -1,11 +1,19 @@
 ## Dockerfiles for research
 - [install docker on ubuntu](./install_dockers.md)
 
+### Sample
+sample Dockerfile is available [here](./sample)
+```
+$ docker build -t sample/sample ./sample
+$ docker run --rm -it -p 8888:8888 -v "$PWD":/home/docker/work sample/sample /bin/bash
+```
+
+
 ### Run on GPU
 - build
 ```
 $ git clone https://github.com/johshisha/docker_for_research && cd docker_for_research
-$ docker build -t [tag]:[version] -f ./Dockerfile.gpu ./ --build-arg PASSWD=docker_user_password
+$ docker build -t [tag]:[version] -f Dockerfile.gpu ./dockers/build/ --build-arg PASSWD=docker_user_password
 ```
 - run jupyter notebook
 ```
@@ -22,7 +30,7 @@ $ nvidia-docker run --rm -it -p 8888:8888 -v "$PWD":/home/docker/work [tag]:[ver
 - build
 ```
 $ git clone https://github.com/johshisha/docker_for_research && cd docker_for_research
-$ docker build -t [tag]:[version] -f ./Dockerfile.cpu ./ --build-arg PASSWD=docker_user_password
+$ docker build -t [tag]:[version] -f Dockerfile.cpu ./dockers/build/ --build-arg PASSWD=docker_user_password
 ```
 - run jupyter notebook
 ```
